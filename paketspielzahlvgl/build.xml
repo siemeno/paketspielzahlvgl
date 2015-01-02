@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<project name="ZahlVgl" basedir=".">
+        <description>
+
+            Buildfile für das Zahlenvergleichsspiel in Ant erstellt
+            in Eclipse.
+
+
+        </description>
+
+      <!-- Definition der Verzeichnisse als globaler Eigenschaften (Finals) -->
+
+      <property name="build" location="build"/>
+      <property name="dist"  location="dist"/>
+      <property name="docs" location="docs" />
+
+
+      <!-- Zuerst werden evtl. schon bestehende Verzeichnisse mit den zuvor gewählten Namen geloescht -->
+      <target name="clean">
+         <delete dir="${build}" />
+         <delete dir="${docs}" />
+         <delete dir="${dist}" />
+         <echo> Alte Verzeichnisse wurden geloescht! </echo>
+         </target>
+
+      <!-- Die Verzeichnisse  build.ver, docs.ver and dist.ver werden neu erstellt-->
+      <target name="makedir">
+         <mkdir dir="${build}" />
+         <mkdir dir="${docs}" />
+         <mkdir dir="${dist}" />
+         <echo>Neue Verzeichnisse wurden erstellt!</echo>
+         </target>
+
+      <!-- Der Java Code wird kompiliert-->
+      <target name="compile" depends="clean, makedir">
+         <javac srcdir="." destdir="${build}" includeantruntime="false">
+         </javac>
+         <echo>Das Programm wurde kompiliert!</echo>
+      </target>
+
+      <!-- Ein Javadoc-Verzeichnis wird erstellt -->
+       <target name="docs" depends="compile">
+          <javadoc sourcepath="${build}" destdir="${docs}">
+          <!-- Define which files / directory should get included, we include all -->
+          <fileset dir=".">
+              <include name="**" />
+          </fileset>
+          </javadoc>
+       </target>
+
+ </project>
+
+
+
+
+
